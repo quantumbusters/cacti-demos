@@ -78,7 +78,12 @@
     "zatti",
     "baio",
     "cccs",
-    "caio"
+    "caio",
+    "htlc",
+    "devdoc",
+    "dweb",
+    "abiencode",
+    "jordi"
   ],
   "dictionaries": ["typescript", "node", "npm"],
   "ignorePaths": [
