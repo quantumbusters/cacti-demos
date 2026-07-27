@@ -20,6 +20,9 @@
     },
     {
       "path": "./packages/cactus-test-plugin-htlc-eth-besu/tsconfig.json"
+    },
+    {
+      "path": "./packages/cactus-test-api-client/tsconfig.json"
     }
   ]
 }

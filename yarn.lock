@@ -5286,6 +5286,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hyperledger-cacti/cactus-test-api-client@workspace:packages/cactus-test-api-client":
+  version: 0.0.0-use.local
+  resolution: "@hyperledger-cacti/cactus-test-api-client@workspace:packages/cactus-test-api-client"
+  dependencies:
+    "@hyperledger-cacti/cacti-plugin-consortium-static": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-api-client": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-cmd-api-server": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core-api": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-plugin-ledger-connector-besu": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-test-tooling": "npm:3.0.0-beta.1"
+    "@types/jest": "npm:29.5.12"
+    "@types/uuid": "npm:10.0.0"
+    jest-extended: "npm:7.0.0"
+    jose: "npm:4.15.5"
+    uuid: "npm:11.1.1"
+    web3: "npm:1.6.1"
+    web3-core: "npm:1.6.1"
+  languageName: unknown
+  linkType: soft
+
 "@hyperledger-cacti/cactus-test-plugin-htlc-eth-besu@workspace:packages/cactus-test-plugin-htlc-eth-besu":
   version: 0.0.0-use.local
   resolution: "@hyperledger-cacti/cactus-test-plugin-htlc-eth-besu@workspace:packages/cactus-test-plugin-htlc-eth-besu"
