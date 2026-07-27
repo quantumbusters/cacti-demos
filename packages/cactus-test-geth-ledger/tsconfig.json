@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist/lib/",
+    "declarationDir": "./dist/lib/",
+    "rootDir": "./src",
+    "tsBuildInfoFile": "../../.build-cache/cactus-test-geth-ledger.tsbuildinfo"
+  },
+  "include": ["./src", "src/**/*.json"],
+  "references": [
+    {
+      "path": "../cactus-test-tooling/tsconfig.json"
+    }
+  ]
+}

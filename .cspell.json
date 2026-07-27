@@ -83,7 +83,10 @@
     "devdoc",
     "dweb",
     "abiencode",
-    "jordi"
+    "jordi",
+    "dockerode",
+    "bajer",
+    "geth"
   ],
   "dictionaries": ["typescript", "node", "npm"],
   "ignorePaths": [

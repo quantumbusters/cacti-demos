@@ -5326,6 +5326,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@hyperledger-cacti/cactus-test-geth-ledger@workspace:packages/cactus-test-geth-ledger":
+  version: 0.0.0-use.local
+  resolution: "@hyperledger-cacti/cactus-test-geth-ledger@workspace:packages/cactus-test-geth-ledger"
+  dependencies:
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-test-tooling": "npm:3.0.0-beta.1"
+    "@types/dockerode": "npm:3.2.7"
+    "@types/jest": "npm:29.5.12"
+    dockerode: "npm:3.3.0"
+    internal-ip: "npm:6.2.0"
+    jest-extended: "npm:7.0.0"
+    run-time-error-cjs: "npm:1.4.0"
+    web3: "npm:4.0.3"
+    web3-eth-accounts: "npm:4.0.3"
+  languageName: unknown
+  linkType: soft
+
 "@hyperledger-cacti/cactus-test-plugin-htlc-eth-besu@workspace:packages/cactus-test-plugin-htlc-eth-besu":
   version: 0.0.0-use.local
   resolution: "@hyperledger-cacti/cactus-test-plugin-htlc-eth-besu@workspace:packages/cactus-test-plugin-htlc-eth-besu"
@@ -25706,7 +25723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-my-json-valid@npm:^2.10.0":
+"is-my-json-valid@npm:^2.10.0, is-my-json-valid@npm:^2.20.6":
   version: 2.20.6
   resolution: "is-my-json-valid@npm:2.20.6"
   dependencies:
@@ -41005,7 +41022,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-core@npm:4.7.1, web3-core@npm:^4.3.2, web3-core@npm:^4.4.0, web3-core@npm:^4.5.0, web3-core@npm:^4.6.0, web3-core@npm:^4.7.1":
+"web3-core@npm:4.7.1, web3-core@npm:^4.0.3, web3-core@npm:^4.3.2, web3-core@npm:^4.4.0, web3-core@npm:^4.5.0, web3-core@npm:^4.6.0, web3-core@npm:^4.7.1":
   version: 4.7.1
   resolution: "web3-core@npm:4.7.1"
   dependencies:
@@ -41025,7 +41042,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-errors@npm:^1.1.3, web3-errors@npm:^1.1.4, web3-errors@npm:^1.2.0, web3-errors@npm:^1.3.0, web3-errors@npm:^1.3.1":
+"web3-errors@npm:^1.0.2, web3-errors@npm:^1.1.3, web3-errors@npm:^1.1.4, web3-errors@npm:^1.2.0, web3-errors@npm:^1.3.0, web3-errors@npm:^1.3.1":
   version: 1.3.1
   resolution: "web3-errors@npm:1.3.1"
   dependencies:
@@ -41054,7 +41071,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-eth-abi@npm:^4.2.0, web3-eth-abi@npm:^4.4.1":
+"web3-eth-abi@npm:^4.0.3, web3-eth-abi@npm:^4.2.0, web3-eth-abi@npm:^4.4.1":
   version: 4.4.1
   resolution: "web3-eth-abi@npm:4.4.1"
   dependencies:
@@ -41104,7 +41121,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-eth-accounts@npm:^4.1.1, web3-eth-accounts@npm:^4.3.1":
+"web3-eth-accounts@npm:4.0.3":
+  version: 4.0.3
+  resolution: "web3-eth-accounts@npm:4.0.3"
+  dependencies:
+    "@ethereumjs/rlp": "npm:^4.0.1"
+    crc-32: "npm:^1.2.2"
+    ethereum-cryptography: "npm:^2.0.0"
+    web3-errors: "npm:^1.0.2"
+    web3-types: "npm:^1.0.2"
+    web3-utils: "npm:^4.0.3"
+    web3-validator: "npm:^1.0.2"
+  checksum: 10/d7fe0d6005e0b0a88fb3898c5819facdb008c853e9bd4141ef255bb7a8c82fee98cbeeeb97201fccb20a0b202314fb59f2bc696068981eb36786964f9902f070
+  languageName: node
+  linkType: hard
+
+"web3-eth-accounts@npm:^4.0.3, web3-eth-accounts@npm:^4.1.1, web3-eth-accounts@npm:^4.3.1":
   version: 4.3.1
   resolution: "web3-eth-accounts@npm:4.3.1"
   dependencies:
@@ -41166,7 +41198,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-eth-contract@npm:^4.2.0, web3-eth-contract@npm:^4.5.0, web3-eth-contract@npm:^4.7.2":
+"web3-eth-contract@npm:^4.0.3, web3-eth-contract@npm:^4.2.0, web3-eth-contract@npm:^4.5.0, web3-eth-contract@npm:^4.7.2":
   version: 4.7.2
   resolution: "web3-eth-contract@npm:4.7.2"
   dependencies:
@@ -41214,7 +41246,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-eth-ens@npm:^4.0.8, web3-eth-ens@npm:^4.4.0":
+"web3-eth-ens@npm:^4.0.3, web3-eth-ens@npm:^4.0.8, web3-eth-ens@npm:^4.4.0":
   version: 4.4.0
   resolution: "web3-eth-ens@npm:4.4.0"
   dependencies:
@@ -41251,7 +41283,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-eth-iban@npm:^4.0.7":
+"web3-eth-iban@npm:^4.0.3, web3-eth-iban@npm:^4.0.7":
   version: 4.0.7
   resolution: "web3-eth-iban@npm:4.0.7"
   dependencies:
@@ -41291,7 +41323,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-eth-personal@npm:^4.0.8, web3-eth-personal@npm:^4.1.0":
+"web3-eth-personal@npm:^4.0.3, web3-eth-personal@npm:^4.0.8, web3-eth-personal@npm:^4.1.0":
   version: 4.1.0
   resolution: "web3-eth-personal@npm:4.1.0"
   dependencies:
@@ -41364,7 +41396,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-eth@npm:^4.11.1, web3-eth@npm:^4.4.0, web3-eth@npm:^4.8.0, web3-eth@npm:^4.9.0":
+"web3-eth@npm:^4.0.3, web3-eth@npm:^4.11.1, web3-eth@npm:^4.4.0, web3-eth@npm:^4.8.0, web3-eth@npm:^4.9.0":
   version: 4.11.1
   resolution: "web3-eth@npm:4.11.1"
   dependencies:
@@ -41405,7 +41437,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-net@npm:^4.0.7, web3-net@npm:^4.1.0":
+"web3-net@npm:^4.0.3, web3-net@npm:^4.0.7, web3-net@npm:^4.1.0":
   version: 4.1.0
   resolution: "web3-net@npm:4.1.0"
   dependencies:
@@ -41439,7 +41471,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-providers-http@npm:^4.1.0, web3-providers-http@npm:^4.2.0":
+"web3-providers-http@npm:^4.0.3, web3-providers-http@npm:^4.1.0, web3-providers-http@npm:^4.2.0":
   version: 4.2.0
   resolution: "web3-providers-http@npm:4.2.0"
   dependencies:
@@ -41504,7 +41536,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-providers-ws@npm:^4.0.7, web3-providers-ws@npm:^4.0.8":
+"web3-providers-ws@npm:^4.0.3, web3-providers-ws@npm:^4.0.7, web3-providers-ws@npm:^4.0.8":
   version: 4.0.8
   resolution: "web3-providers-ws@npm:4.0.8"
   dependencies:
@@ -41518,7 +41550,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-rpc-methods@npm:^1.1.4, web3-rpc-methods@npm:^1.3.0":
+"web3-rpc-methods@npm:^1.0.2, web3-rpc-methods@npm:^1.1.4, web3-rpc-methods@npm:^1.3.0":
   version: 1.3.0
   resolution: "web3-rpc-methods@npm:1.3.0"
   dependencies:
@@ -41567,7 +41599,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-types@npm:^1.10.0, web3-types@npm:^1.3.0, web3-types@npm:^1.3.1, web3-types@npm:^1.6.0, web3-types@npm:^1.7.0, web3-types@npm:^1.8.0":
+"web3-types@npm:^1.0.2, web3-types@npm:^1.10.0, web3-types@npm:^1.3.0, web3-types@npm:^1.3.1, web3-types@npm:^1.6.0, web3-types@npm:^1.7.0, web3-types@npm:^1.8.0":
   version: 1.10.0
   resolution: "web3-types@npm:1.10.0"
   checksum: 10/849f05a001896b27082c5b5c46c62b65a28f463366eeec7223802418a61db6d3487ebfb73d1fe6dcad3f0849a76e20706098819cb4e266df4f75ca24617e62a1
@@ -41605,7 +41637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"web3-utils@npm:4.3.3, web3-utils@npm:^4.0.7, web3-utils@npm:^4.1.1, web3-utils@npm:^4.3.0, web3-utils@npm:^4.3.1, web3-utils@npm:^4.3.3":
+"web3-utils@npm:4.3.3, web3-utils@npm:^4.0.3, web3-utils@npm:^4.0.7, web3-utils@npm:^4.1.1, web3-utils@npm:^4.3.0, web3-utils@npm:^4.3.1, web3-utils@npm:^4.3.3":
   version: 4.3.3
   resolution: "web3-utils@npm:4.3.3"
   dependencies:
@@ -41615,6 +41647,19 @@ __metadata:
     web3-types: "npm:^1.10.0"
     web3-validator: "npm:^2.0.6"
   checksum: 10/c91ebbe67e469fe184ab258564b1f002f6f0e563a91637429c8e5bd3f0653b970d0c45dac544402021a5512297f0bea39aa2dd0b4c9bc6f54d4b58897f2dd002
+  languageName: node
+  linkType: hard
+
+"web3-validator@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "web3-validator@npm:1.0.2"
+  dependencies:
+    ethereum-cryptography: "npm:^2.0.0"
+    is-my-json-valid: "npm:^2.20.6"
+    util: "npm:^0.12.5"
+    web3-errors: "npm:^1.0.2"
+    web3-types: "npm:^1.0.2"
+  checksum: 10/d8040735718f5f183b5bee417c93a217c5b866b977bef4ff31b79b3c0df784a1489d354c04a73eaefc32d4b5c3cc26b7ca173345c47b738b9c09dab234aee6d0
   languageName: node
   linkType: hard
 
@@ -41643,6 +41688,30 @@ __metadata:
     web3-shh: "npm:1.6.1"
     web3-utils: "npm:1.6.1"
   checksum: 10/3b120c39e3f557c61ac9c2b18743de958f97bd843aa0bc0eed2179c11d1a57d13853eed327734c7e4639737796d6bd45e72567fd5826cbfdc9b9dafa5f96a927
+  languageName: node
+  linkType: hard
+
+"web3@npm:4.0.3":
+  version: 4.0.3
+  resolution: "web3@npm:4.0.3"
+  dependencies:
+    web3-core: "npm:^4.0.3"
+    web3-errors: "npm:^1.0.2"
+    web3-eth: "npm:^4.0.3"
+    web3-eth-abi: "npm:^4.0.3"
+    web3-eth-accounts: "npm:^4.0.3"
+    web3-eth-contract: "npm:^4.0.3"
+    web3-eth-ens: "npm:^4.0.3"
+    web3-eth-iban: "npm:^4.0.3"
+    web3-eth-personal: "npm:^4.0.3"
+    web3-net: "npm:^4.0.3"
+    web3-providers-http: "npm:^4.0.3"
+    web3-providers-ws: "npm:^4.0.3"
+    web3-rpc-methods: "npm:^1.0.2"
+    web3-types: "npm:^1.0.2"
+    web3-utils: "npm:^4.0.3"
+    web3-validator: "npm:^1.0.2"
+  checksum: 10/1def9b674aacb1c26253e8a437c0669e17546569f914a97d90dfbe7750b26080ca8fab9b3453d7fc5cf0f231f8e9920533f1f04d64af7d1db8ea5be174e22723
   languageName: node
   linkType: hard
 

@@ -1,0 +1,31 @@
+// *****************************************************************************
+// IMPORTANT: If you update this code then make sure to recompile
+// it and update the .json file as well so that they
+// remain in sync for consistent test executions.
+// With that said, there shouldn't be any reason to recompile this, like ever...
+// *****************************************************************************
+
+pragma solidity >=0.8.0;
+
+/// @title Hello World Contract
+/// @author Hyperledger Cacti Contributors
+/// @notice A simple hello world contract for testing
+contract HelloWorld {
+  string private name = "CaptainCactus";
+
+  /// @notice returns a greeting
+  function sayHello() public pure returns (string memory) {
+    return "Hello World!";
+  }
+
+  /// @notice returns the name
+  function getName() public view returns (string memory) {
+    return name;
+  }
+
+  /// @notice sets the name
+  /// @param newName the new name
+  function setName(string memory newName) public {
+    name = newName;
+  }
+}
