@@ -1,0 +1,100 @@
+import path from "path";
+import "jest-extended";
+import { v4 as uuidv4 } from "uuid";
+import { generateKeyPair, exportPKCS8 } from "jose";
+
+import { LogLevelDesc } from "@hyperledger-cacti/cactus-common";
+
+import {
+  PluginImportType,
+  ConsortiumDatabase,
+  PluginImportAction,
+} from "@hyperledger-cacti/cactus-core-api";
+
+import {
+  ApiServer,
+  AuthorizationProtocol,
+  ConfigService,
+} from "@hyperledger-cacti/cactus-cmd-api-server";
+
+const logLevel: LogLevelDesc = "TRACE";
+const testcase = "can instal plugins at runtime based on imports";
+
+describe(testcase, () => {
+  let apiServer: ApiServer;
+
+  beforeAll(async () => {
+    // Adding a new plugin to update the prometheus metric K_CACTUS_API_SERVER_TOTAL_PLUGIN_IMPORTS
+    const keyPair = await generateKeyPair("ES256K");
+    const keyPairPem = await exportPKCS8(keyPair.privateKey);
+    const db: ConsortiumDatabase = {
+      cactusNode: [],
+      consortium: [],
+      consortiumMember: [],
+      ledger: [],
+      pluginInstance: [],
+    };
+    const pluginsPath = path.join(
+      __dirname,
+      "../../../../../../", // walk back up to the project root
+      ".tmp/test/test-cmd-api-server/plugin-import-with-npm-install_test/", // the dir path from the root
+      uuidv4(), // then a random directory to ensure proper isolation
+    );
+    const pluginManagerOptionsJson = JSON.stringify({ pluginsPath });
+
+    const configService = new ConfigService();
+
+    const apiServerOptions = await configService.newExampleConfig();
+    apiServerOptions.pluginManagerOptionsJson = pluginManagerOptionsJson;
+    apiServerOptions.authorizationProtocol = AuthorizationProtocol.NONE;
+    apiServerOptions.configFile = "";
+    apiServerOptions.apiCorsDomainCsv = "*";
+    apiServerOptions.apiPort = 0;
+    apiServerOptions.cockpitPort = 0;
+    apiServerOptions.grpcPort = 0;
+    apiServerOptions.crpcPort = 0;
+    apiServerOptions.apiTlsEnabled = false;
+    apiServerOptions.plugins = [
+      {
+        packageName: "@hyperledger-cacti/cactus-plugin-keychain-memory",
+        type: PluginImportType.Local,
+        action: PluginImportAction.Install,
+        options: {
+          instanceId: uuidv4(),
+          keychainId: uuidv4(),
+          logLevel,
+          packageSrc: path.join(
+            __dirname,
+            "../../../../../../packages/cactus-plugin-keychain-memory",
+          ),
+        },
+      },
+      {
+        packageName: "@hyperledger-cacti/cacti-plugin-consortium-static",
+        type: PluginImportType.Local,
+        action: PluginImportAction.Install,
+        options: {
+          instanceId: uuidv4(),
+          keyPairPem: keyPairPem,
+          consortiumDatabase: db,
+          packageSrc: path.join(
+            __dirname,
+            "../../../../../../packages/cacti-plugin-consortium-static",
+          ),
+        },
+      },
+    ];
+    const config =
+      await configService.newExampleConfigConvict(apiServerOptions);
+
+    apiServer = new ApiServer({
+      config: config.getProperties(),
+    });
+  });
+  afterAll(() => apiServer.shutdown());
+
+  test(testcase, async () => {
+    const startResponse = apiServer.start();
+    await expect(startResponse).resolves.toBeTruthy();
+  });
+});

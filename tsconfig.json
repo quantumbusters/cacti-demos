@@ -23,6 +23,9 @@
     },
     {
       "path": "./packages/cactus-test-api-client/tsconfig.json"
+    },
+    {
+      "path": "./packages/cactus-test-cmd-api-server/tsconfig.json"
     }
   ]
 }

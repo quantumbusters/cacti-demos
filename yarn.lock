@@ -5308,6 +5308,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@hyperledger-cacti/cactus-test-cmd-api-server@workspace:packages/cactus-test-cmd-api-server":
+  version: 0.0.0-use.local
+  resolution: "@hyperledger-cacti/cactus-test-cmd-api-server@workspace:packages/cactus-test-cmd-api-server"
+  dependencies:
+    "@hyperledger-cacti/cactus-cmd-api-server": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core-api": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-test-tooling": "npm:3.0.0-beta.1"
+    "@types/jest": "npm:29.5.12"
+    "@types/uuid": "npm:10.0.0"
+    express-jwt-authz: "npm:2.4.1"
+    jest-extended: "npm:7.0.0"
+    jose: "npm:4.15.5"
+    uuid: "npm:11.1.1"
+  languageName: unknown
+  linkType: soft
+
 "@hyperledger-cacti/cactus-test-plugin-htlc-eth-besu@workspace:packages/cactus-test-plugin-htlc-eth-besu":
   version: 0.0.0-use.local
   resolution: "@hyperledger-cacti/cactus-test-plugin-htlc-eth-besu@workspace:packages/cactus-test-plugin-htlc-eth-besu"

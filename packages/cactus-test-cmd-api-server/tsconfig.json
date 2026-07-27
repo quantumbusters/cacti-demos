@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist/lib/",
+    "declarationDir": "dist/lib",
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    "tsBuildInfoFile": "../../.build-cache/cactus-test-cmd-api-server.tsbuildinfo"
+  },
+  "include": ["./src"],
+  "references": [
+    {
+      "path": "../cactus-test-tooling/tsconfig.json"
+    }
+  ]
+}
