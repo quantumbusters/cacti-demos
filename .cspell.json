@@ -89,7 +89,18 @@
     "geth",
     "copm",
     "connectrpc",
-    "gprc"
+    "gprc",
+    "jordigironamezcua",
+    "pruebas",
+    "iszero",
+    "mload",
+    "ptrt",
+    "addresst",
+    "reentrancy",
+    "ierc",
+    "customise",
+    "abiencodewithselector",
+    "emscripten"
   ],
   "dictionaries": ["typescript", "node", "npm"],
   "ignorePaths": [
