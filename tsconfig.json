@@ -38,6 +38,9 @@
     },
     {
       "path": "./packages/cactus-test-plugin-htlc-eth-besu-erc20/tsconfig.json"
+    },
+    {
+      "path": "./packages/cactus-test-plugin-ledger-connector-besu/tsconfig.json"
     }
   ]
 }
