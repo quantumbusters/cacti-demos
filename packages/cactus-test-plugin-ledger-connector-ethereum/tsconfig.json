@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist/lib/",
+    "declarationDir": "dist/lib",
+    "resolveJsonModule": true,
+    "rootDir": "./src",
+    "tsBuildInfoFile": "../../.build-cache/cactus-test-plugin-ledger-connector-ethereum.tsbuildinfo"
+  },
+  "include": ["./src", "src/**/*.json"],
+  "references": [
+    {
+      "path": "../cactus-test-tooling/tsconfig.json"
+    }
+  ]
+}

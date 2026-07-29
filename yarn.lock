@@ -5551,7 +5551,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@hyperledger-cacti/cactus-test-geth-ledger@workspace:packages/cactus-test-geth-ledger":
+"@hyperledger-cacti/cactus-test-geth-ledger@workspace:*, @hyperledger-cacti/cactus-test-geth-ledger@workspace:packages/cactus-test-geth-ledger":
   version: 0.0.0-use.local
   resolution: "@hyperledger-cacti/cactus-test-geth-ledger@workspace:packages/cactus-test-geth-ledger"
   dependencies:
@@ -5595,6 +5595,30 @@ __metadata:
     uuid: "npm:11.1.1"
     web3: "npm:1.6.1"
     web3js-quorum: "npm:22.4.0"
+  languageName: unknown
+  linkType: soft
+
+"@hyperledger-cacti/cactus-test-plugin-ledger-connector-ethereum@workspace:packages/cactus-test-plugin-ledger-connector-ethereum":
+  version: 0.0.0-use.local
+  resolution: "@hyperledger-cacti/cactus-test-plugin-ledger-connector-ethereum@workspace:packages/cactus-test-plugin-ledger-connector-ethereum"
+  dependencies:
+    "@hyperledger-cacti/cactus-api-client": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-cmd-api-server": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core-api": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-plugin-keychain-memory": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-plugin-ledger-connector-ethereum": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-test-geth-ledger": "workspace:*"
+    "@hyperledger-cacti/cactus-test-tooling": "workspace:*"
+    "@types/jest": "npm:^30.0.0"
+    "@types/lodash": "npm:4.14.195"
+    "@types/uuid": "npm:10.0.0"
+    jest-extended: "npm:7.0.0"
+    lodash: "npm:4.18.1"
+    uuid: "npm:11.1.1"
+    web3: "npm:4.4.0"
+    web3-eth-contract: "npm:4.2.0"
   languageName: unknown
   linkType: soft
 
@@ -11871,6 +11895,13 @@ __metadata:
   version: 4.14.172
   resolution: "@types/lodash@npm:4.14.172"
   checksum: 10/0653e578262d42071b31b3ae349e962d9f18442e5ec7f09894d3b6207995cfbdfef0bdd3917acb90c0ddd22c6eaf72215c84cf118d44a9fdcfafb0faa848882a
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:4.14.195":
+  version: 4.14.195
+  resolution: "@types/lodash@npm:4.14.195"
+  checksum: 10/d7c0902684508a3d0fdb60fe939a855f9f244fd4bf828eb75388a39d00b44e955dac16faea6c90c0ae4592a57784e45ceb6d51354af8dfd401de38046c685775
   languageName: node
   linkType: hard
 

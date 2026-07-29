@@ -32,6 +32,9 @@
     },
     {
       "path": "./packages/cacti-copm-test/tsconfig.json"
+    },
+    {
+      "path": "./packages/cactus-test-plugin-ledger-connector-ethereum/tsconfig.json"
     }
   ]
 }
