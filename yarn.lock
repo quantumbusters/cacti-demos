@@ -2120,6 +2120,79 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bufbuild/buf-darwin-arm64@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bufbuild/buf-darwin-arm64@npm:1.30.0"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@bufbuild/buf-darwin-x64@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bufbuild/buf-darwin-x64@npm:1.30.0"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@bufbuild/buf-linux-aarch64@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bufbuild/buf-linux-aarch64@npm:1.30.0"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@bufbuild/buf-linux-x64@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bufbuild/buf-linux-x64@npm:1.30.0"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@bufbuild/buf-win32-arm64@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bufbuild/buf-win32-arm64@npm:1.30.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@bufbuild/buf-win32-x64@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bufbuild/buf-win32-x64@npm:1.30.0"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@bufbuild/buf@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bufbuild/buf@npm:1.30.0"
+  dependencies:
+    "@bufbuild/buf-darwin-arm64": "npm:1.30.0"
+    "@bufbuild/buf-darwin-x64": "npm:1.30.0"
+    "@bufbuild/buf-linux-aarch64": "npm:1.30.0"
+    "@bufbuild/buf-linux-x64": "npm:1.30.0"
+    "@bufbuild/buf-win32-arm64": "npm:1.30.0"
+    "@bufbuild/buf-win32-x64": "npm:1.30.0"
+  dependenciesMeta:
+    "@bufbuild/buf-darwin-arm64":
+      optional: true
+    "@bufbuild/buf-darwin-x64":
+      optional: true
+    "@bufbuild/buf-linux-aarch64":
+      optional: true
+    "@bufbuild/buf-linux-x64":
+      optional: true
+    "@bufbuild/buf-win32-arm64":
+      optional: true
+    "@bufbuild/buf-win32-x64":
+      optional: true
+  bin:
+    buf: bin/buf
+    protoc-gen-buf-breaking: bin/protoc-gen-buf-breaking
+    protoc-gen-buf-lint: bin/protoc-gen-buf-lint
+  checksum: 10/5e383bd7d8b8820c7336e6471c2cef03edfa4003c66ff7543cff8b76815bbc7c96b54016cfbffe7acc37b6738277d545a2b1e4941880bcc4e219790773db34f0
+  languageName: node
+  linkType: hard
+
 "@bufbuild/protobuf@npm:1.10.0":
   version: 1.10.0
   resolution: "@bufbuild/protobuf@npm:1.10.0"
@@ -2465,6 +2538,16 @@ __metadata:
     "@bufbuild/protobuf": ^2.2.0
     "@connectrpc/connect": 2.0.0
   checksum: 10/439aa16bd016ed96577bb547d02d6abc4e2fa8e290f46fffbea6e000b932845fe9071d5c334b1398df8081d9373faca9f17ecb9f69292a4636496ab842e2c3b5
+  languageName: node
+  linkType: hard
+
+"@connectrpc/connect-web@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@connectrpc/connect-web@npm:1.4.0"
+  peerDependencies:
+    "@bufbuild/protobuf": ^1.4.2
+    "@connectrpc/connect": 1.4.0
+  checksum: 10/9274918a1c351353d8e38cc931b36013189698553eb7211fc60eb03454c605eff63cc542eec359ebaca1d37edb7558f32fe8ab70ed36811912765e0ec37822db
   languageName: node
   linkType: hard
 
@@ -4698,6 +4781,49 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hyperledger-cacti/cacti-copm-core@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "@hyperledger-cacti/cacti-copm-core@npm:3.0.0-beta.1"
+  dependencies:
+    "@bufbuild/buf": "npm:1.30.0"
+    "@bufbuild/protobuf": "npm:1.10.0"
+    "@connectrpc/connect": "npm:1.4.0"
+    "@hyperledger-cacti/cacti-weaver-sdk-fabric": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+  checksum: 10/0de35eb40064748149843286fd8269a8cf4cc99f2062302202312dcc35259df99795429eafe0b12b5623d05328d0ebe6c2da82c0af5775565593f765affce385
+  languageName: node
+  linkType: hard
+
+"@hyperledger-cacti/cacti-copm-test@workspace:packages/cacti-copm-test":
+  version: 0.0.0-use.local
+  resolution: "@hyperledger-cacti/cacti-copm-test@workspace:packages/cacti-copm-test"
+  dependencies:
+    "@connectrpc/connect": "npm:1.4.0"
+    "@connectrpc/connect-node": "npm:1.4.0"
+    "@hyperledger-cacti/cacti-copm-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-plugin-copm-corda": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-plugin-copm-fabric": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-weaver-protos-js": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-weaver-sdk-fabric": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-cmd-api-server": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core-api": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-plugin-ledger-connector-corda": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-test-tooling": "npm:3.0.0-beta.1"
+    "@types/dockerode": "npm:3.2.7"
+    "@types/jest": "npm:^30.0.0"
+    dockerode: "npm:3.3.0"
+    dotenv: "npm:17.2.3"
+    fabric-ca-client: "npm:2.2.20"
+    fabric-common: "npm:2.2.20"
+    fabric-network: "npm:2.2.20"
+    fs-extra: "npm:11.2.0"
+    jest-extended: "npm:7.0.0"
+    uuid: "npm:11.1.1"
+  languageName: unknown
+  linkType: soft
+
 "@hyperledger-cacti/cacti-example-cbdc-bridging-frontend@workspace:examples/cactus-example-cbdc-bridging-frontend":
   version: 0.0.0-use.local
   resolution: "@hyperledger-cacti/cacti-example-cbdc-bridging-frontend@workspace:examples/cactus-example-cbdc-bridging-frontend"
@@ -4759,6 +4885,45 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hyperledger-cacti/cacti-plugin-copm-corda@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "@hyperledger-cacti/cacti-plugin-copm-corda@npm:3.0.0-beta.1"
+  dependencies:
+    "@bufbuild/buf": "npm:1.30.0"
+    "@bufbuild/protobuf": "npm:1.10.0"
+    "@connectrpc/connect": "npm:1.4.0"
+    "@connectrpc/connect-node": "npm:1.4.0"
+    "@connectrpc/connect-web": "npm:1.4.0"
+    "@hyperledger-cacti/cacti-copm-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-weaver-protos-js": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-weaver-sdk-fabric": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core-api": "npm:3.0.0-beta.1"
+  checksum: 10/86a3e4ff38c1c85e5c63f1d15754bd552509a3592d99c29388a933963d6d145d6c1cbb8231a9b1061f5e049f3cdd71fe7a4650357115df33e7b5608ef7aa7042
+  languageName: node
+  linkType: hard
+
+"@hyperledger-cacti/cacti-plugin-copm-fabric@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "@hyperledger-cacti/cacti-plugin-copm-fabric@npm:3.0.0-beta.1"
+  dependencies:
+    "@bufbuild/buf": "npm:1.30.0"
+    "@bufbuild/protobuf": "npm:1.10.0"
+    "@connectrpc/connect": "npm:1.4.0"
+    "@hyperledger-cacti/cacti-copm-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-weaver-protos-js": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cacti-weaver-sdk-fabric": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core-api": "npm:3.0.0-beta.1"
+    fabric-ca-client: "npm:2.2.20"
+    fabric-common: "npm:2.2.20"
+    fabric-network: "npm:2.2.20"
+  checksum: 10/d54d81f3c17433823ec472c8a404ac1a6abb5898525ae85c58e9b2e925b7458fe04c948f3247cfa13417e13529dd60142eabed4b6918490cc46b089bf81b82ee
+  languageName: node
+  linkType: hard
+
 "@hyperledger-cacti/cacti-starter@workspace:examples/cacti-starter":
   version: 0.0.0-use.local
   resolution: "@hyperledger-cacti/cacti-starter@workspace:examples/cacti-starter"
@@ -4767,6 +4932,42 @@ __metadata:
     "@hyperledger-cacti/cactus-plugin-keychain-memory": "npm:3.0.0-beta.1"
   languageName: unknown
   linkType: soft
+
+"@hyperledger-cacti/cacti-weaver-protos-js@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "@hyperledger-cacti/cacti-weaver-protos-js@npm:3.0.0-beta.1"
+  dependencies:
+    "@grpc/grpc-js": "npm:1.13.3"
+    "@grpc/proto-loader": "npm:0.7.13"
+    "@types/node": "npm:18.19.0"
+    google-protobuf: "npm:3.21.4"
+    grpc-tools: "npm:1.12.4"
+  checksum: 10/052b861f6245b39a5c0e3bcd2cdef2518ba851950b70a5c3b79cf44fcbb9d54a55223dd86f953b2b58cfde592533286c1bdaee1916dc00f9d655cf0f76737051
+  languageName: node
+  linkType: hard
+
+"@hyperledger-cacti/cacti-weaver-sdk-fabric@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "@hyperledger-cacti/cacti-weaver-sdk-fabric@npm:3.0.0-beta.1"
+  dependencies:
+    "@grpc/grpc-js": "npm:1.13.3"
+    "@grpc/proto-loader": "npm:0.7.13"
+    "@hyperledger-cacti/cacti-weaver-protos-js": "npm:3.0.0-beta.1"
+    elliptic: "npm:6.6.1"
+    fabric-common: "npm:2.2.20"
+    fabric-network: "npm:2.2.20"
+    fabric-protos: "npm:2.2.20"
+    get-func-name: "npm:2.0.0"
+    js-sha3: "npm:0.8.0"
+    jsrsasign: "npm:11.0.0"
+    log4js: "npm:6.9.1"
+    pkcs11js: "npm:1.3.1"
+    sjcl: "npm:1.0.9"
+    sshpk: "npm:1.17.0"
+    uuid: "npm:10.0.0"
+  checksum: 10/eabcc09696769b89656836f75dbf3dc1389fbda966b73b1d531061897baf8804e17805de261f87394548fac1c9371d1cf9f030a6734d42e89c853c10990d804d
+  languageName: node
+  linkType: hard
 
 "@hyperledger-cacti/cactus-api-client@npm:3.0.0-beta.1":
   version: 3.0.0-beta.1
@@ -5113,6 +5314,30 @@ __metadata:
     web3js-quorum: "npm:22.4.0"
     websocket-event-codes: "npm:1.1.0"
   checksum: 10/b6f0e0faa46bf7ecfa5d694fe9c41fee11c2bda738228404522357dd32e5005c50ec1c6228e0c5f9a451175d5d0838eb7c4cb0e999aa0225ca142f9661e1738e
+  languageName: node
+  linkType: hard
+
+"@hyperledger-cacti/cactus-plugin-ledger-connector-corda@npm:3.0.0-beta.1":
+  version: 3.0.0-beta.1
+  resolution: "@hyperledger-cacti/cactus-plugin-ledger-connector-corda@npm:3.0.0-beta.1"
+  dependencies:
+    "@hyperledger-cacti/cactus-common": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core": "npm:3.0.0-beta.1"
+    "@hyperledger-cacti/cactus-core-api": "npm:3.0.0-beta.1"
+    axios: "npm:1.15.0"
+    express: "npm:5.1.0"
+    express-openapi-validator: "npm:5.2.0"
+    http-errors-enhanced-cjs: "npm:2.0.1"
+    internal-ip: "npm:6.2.0"
+    joi: "npm:17.13.3"
+    node-fetch: "npm:2.7.0"
+    node-ssh: "npm:13.1.0"
+    prom-client: "npm:15.1.3"
+    rxjs: "npm:7.8.1"
+    temp: "npm:0.9.4"
+    typescript-optional: "npm:2.0.1"
+    urlcat: "npm:3.1.0"
+  checksum: 10/fcfbb2ccd81860285c6769eb8c88f43c1f772dc117d2d5fdf5d84d9f1de2df0c5e37994cc0eee771f7b1da20d147edc60e69a28f37cc345b253386b395e15638
   languageName: node
   linkType: hard
 
@@ -6918,7 +7143,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mapbox/node-pre-gyp@npm:^1.0.0, @mapbox/node-pre-gyp@npm:^1.0.11":
+"@mapbox/node-pre-gyp@npm:^1.0.0, @mapbox/node-pre-gyp@npm:^1.0.11, @mapbox/node-pre-gyp@npm:^1.0.5":
   version: 1.0.11
   resolution: "@mapbox/node-pre-gyp@npm:1.0.11"
   dependencies:
@@ -11576,7 +11801,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:30.0.0":
+"@types/jest@npm:30.0.0, @types/jest@npm:^30.0.0":
   version: 30.0.0
   resolution: "@types/jest@npm:30.0.0"
   dependencies:
@@ -11779,6 +12004,15 @@ __metadata:
   version: 18.15.13
   resolution: "@types/node@npm:18.15.13"
   checksum: 10/b9bbe923573797ef7c5fd2641a6793489e25d9369c32aeadcaa5c7c175c85b42eb12d6fe173f6781ab6f42eaa1ebd9576a419eeaa2a1ec810094adb8adaa9a54
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:18.19.0":
+  version: 18.19.0
+  resolution: "@types/node@npm:18.19.0"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10/dfaf489b31098d5184aa6ce07fec9619d05b2c953a319b23b0f46e4c901b9996d87da8c193ea388488119ccc8e79ce228d769b7a59077ac6645aa86c826b56cd
   languageName: node
   linkType: hard
 
@@ -19452,6 +19686,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:17.2.3":
+  version: 17.2.3
+  resolution: "dotenv@npm:17.2.3"
+  checksum: 10/f8b78626ebfff6e44420f634773375c9651808b3e1a33df6d4cc19120968eea53e100f59f04ec35f2a20b2beb334b6aba4f24040b2f8ad61773f158ac042a636
+  languageName: node
+  linkType: hard
+
 "dotenv@npm:17.4.2":
   version: 17.4.2
   resolution: "dotenv@npm:17.4.2"
@@ -22004,6 +22245,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fabric-ca-client@npm:2.2.20":
+  version: 2.2.20
+  resolution: "fabric-ca-client@npm:2.2.20"
+  dependencies:
+    fabric-common: "npm:2.2.20"
+    jsrsasign: "npm:^10.5.25"
+    url: "npm:^0.11.0"
+    winston: "npm:^2.4.5"
+  checksum: 10/1035323a4fc9697b569a4a5ae89d4f60adf6cd4e7ab415a2744d97e5ad478c21ba928f18bc3e241189975e14c290d1e878bc39305ea1f8c24958561ceaf97d02
+  languageName: node
+  linkType: hard
+
 "fabric-ca-client@npm:2.5.0-snapshot.23":
   version: 2.5.0-snapshot.23
   resolution: "fabric-ca-client@npm:2.5.0-snapshot.23"
@@ -23279,6 +23532,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-func-name@npm:2.0.0":
+  version: 2.0.0
+  resolution: "get-func-name@npm:2.0.0"
+  checksum: 10/8d82e69f3e7fab9e27c547945dfe5cc0c57fc0adf08ce135dddb01081d75684a03e7a0487466f478872b341d52ac763ae49e660d01ab83741f74932085f693c3
+  languageName: node
+  linkType: hard
+
 "get-func-name@npm:^2.0.1, get-func-name@npm:^2.0.2":
   version: 2.0.2
   resolution: "get-func-name@npm:2.0.2"
@@ -23938,6 +24198,18 @@ __metadata:
   version: 1.4.0
   resolution: "graphemer@npm:1.4.0"
   checksum: 10/6dd60dba97007b21e3a829fab3f771803cc1292977fe610e240ea72afd67e5690ac9eeaafc4a99710e78962e5936ab5a460787c2a1180f1cb0ccfac37d29f897
+  languageName: node
+  linkType: hard
+
+"grpc-tools@npm:1.12.4":
+  version: 1.12.4
+  resolution: "grpc-tools@npm:1.12.4"
+  dependencies:
+    "@mapbox/node-pre-gyp": "npm:^1.0.5"
+  bin:
+    grpc_tools_node_protoc: bin/protoc.js
+    grpc_tools_node_protoc_plugin: bin/protoc_plugin.js
+  checksum: 10/56852c756fe34be5f3b2cf75b1d432886b17ad32d438cacbcf8d30e980c7361a8e8325b1e626ce99826b8dbf1364145bedbedeb6d7feb916c4801481810a05d1
   languageName: node
   linkType: hard
 
@@ -30873,17 +31145,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:3.0.0-beta.9":
-  version: 3.0.0-beta.9
-  resolution: "node-fetch@npm:3.0.0-beta.9"
-  dependencies:
-    data-uri-to-buffer: "npm:^3.0.1"
-    fetch-blob: "npm:^2.1.1"
-  checksum: 10/419fe532b80d6f291950ec995b32a80a6ffbf3ede476c0d3e81ccac116029160e5799d7a2b6474128756ec6a1faa6a23b5e515f9ba28c089430ea157750dcd89
-  languageName: node
-  linkType: hard
-
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7, node-fetch@npm:^2.6.8, node-fetch@npm:^2.6.9, node-fetch@npm:^2.7.0":
+"node-fetch@npm:2.7.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7, node-fetch@npm:^2.6.8, node-fetch@npm:^2.6.9, node-fetch@npm:^2.7.0":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
   dependencies:
@@ -30894,6 +31156,16 @@ __metadata:
     encoding:
       optional: true
   checksum: 10/b24f8a3dc937f388192e59bcf9d0857d7b6940a2496f328381641cb616efccc9866e89ec43f2ec956bbd6c3d3ee05524ce77fe7b29ccd34692b3a16f237d6676
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:3.0.0-beta.9":
+  version: 3.0.0-beta.9
+  resolution: "node-fetch@npm:3.0.0-beta.9"
+  dependencies:
+    data-uri-to-buffer: "npm:^3.0.1"
+    fetch-blob: "npm:^2.1.1"
+  checksum: 10/419fe532b80d6f291950ec995b32a80a6ffbf3ede476c0d3e81ccac116029160e5799d7a2b6474128756ec6a1faa6a23b5e515f9ba28c089430ea157750dcd89
   languageName: node
   linkType: hard
 
@@ -32951,7 +33223,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pkcs11js@npm:^1.0.6, pkcs11js@npm:^1.3.0":
+"pkcs11js@npm:1.3.1, pkcs11js@npm:^1.0.6, pkcs11js@npm:^1.3.0":
   version: 1.3.1
   resolution: "pkcs11js@npm:1.3.1"
   dependencies:
@@ -37006,7 +37278,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sjcl@npm:^1.0.8":
+"sjcl@npm:1.0.9, sjcl@npm:^1.0.8":
   version: 1.0.9
   resolution: "sjcl@npm:1.0.9"
   checksum: 10/5b338652280cd1011f04cad8ba154ce309fb599b8974bbd36c2d61ec1ef7486ff4756143549ef0bb7ee4c540632535ee315a6ca57dc4565b9c69ddde98545593
@@ -37605,6 +37877,27 @@ __metadata:
     nan:
       optional: true
   checksum: 10/5a7e911f234f73c4332f2b436cc6131c164962d2eac71f463ab401b54c4b8627875d9c9be1c55e0bfd1a0eae108cfa33217bc73939287e4a5e81f34f532b1036
+  languageName: node
+  linkType: hard
+
+"sshpk@npm:1.17.0":
+  version: 1.17.0
+  resolution: "sshpk@npm:1.17.0"
+  dependencies:
+    asn1: "npm:~0.2.3"
+    assert-plus: "npm:^1.0.0"
+    bcrypt-pbkdf: "npm:^1.0.0"
+    dashdash: "npm:^1.12.0"
+    ecc-jsbn: "npm:~0.1.1"
+    getpass: "npm:^0.1.1"
+    jsbn: "npm:~0.1.0"
+    safer-buffer: "npm:^2.0.2"
+    tweetnacl: "npm:~0.14.0"
+  bin:
+    sshpk-conv: bin/sshpk-conv
+    sshpk-sign: bin/sshpk-sign
+    sshpk-verify: bin/sshpk-verify
+  checksum: 10/668c2a279a6ce66fd739ce5684e37927dd75427cc020c828a208f85890a4c400705d4ba09f32fa44efca894339dc6931941664f6f6ba36dfa543de6d006cbe9c
   languageName: node
   linkType: hard
 
@@ -40427,6 +40720,15 @@ __metadata:
     punycode: "npm:^1.4.1"
     qs: "npm:^6.12.3"
   checksum: 10/e787d070f0756518b982a4653ef6cdf4d9030d8691eee2d483344faf2b530b71d302287fa63b292299455fea5075c502a5ad5f920cb790e95605847f957a65e4
+  languageName: node
+  linkType: hard
+
+"urlcat@npm:3.1.0":
+  version: 3.1.0
+  resolution: "urlcat@npm:3.1.0"
+  dependencies:
+    qs: "npm:^6.9.4"
+  checksum: 10/1e6106c96bf71bf268b5bcd528e8e07b82001039f7103ec637702f89eebe1b5c2a5120f3dcff8a1b968a6edaafaa87ec67832e2f13302da4cabbb98880d45183
   languageName: node
   linkType: hard
 

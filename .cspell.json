@@ -86,7 +86,10 @@
     "jordi",
     "dockerode",
     "bajer",
-    "geth"
+    "geth",
+    "copm",
+    "connectrpc",
+    "gprc"
   ],
   "dictionaries": ["typescript", "node", "npm"],
   "ignorePaths": [

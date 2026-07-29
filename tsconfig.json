@@ -29,6 +29,9 @@
     },
     {
       "path": "./packages/cactus-test-geth-ledger/tsconfig.json"
+    },
+    {
+      "path": "./packages/cacti-copm-test/tsconfig.json"
     }
   ]
 }
