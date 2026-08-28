@@ -114,3 +114,29 @@ the reverse-proxy approach is the least invasive and easiest to demonstrate.
 
 Private keys and other secrets must remain outside Git. Public demo CA and
 certificate handling should be documented when Case 4 is implemented.
+
+## Verified Case 4 Results  2026-08-28
+
+Case 4 was implemented and tested on feature/satp-case-4-tls-pqc. The
+implementation uses two instances of one Debian 13 NGINX 1.26.3 image running
+with OpenSSL 3.5.7. Gateway-local hops remain HTTP; the proxy-to-proxy link is
+TLS 1.3. No Cacti application source change was required.
+
+All four scenarios completed the same 100-token transfer as Case 1 with source
+balance 0, destination balance 100, and both bridge balances 0:
+
+- 4A: X25519 with classical server authentication.
+- 4B: X25519 with classical mutual TLS.
+- 4C: X25519MLKEM768 with the same classical mutual-TLS identities as 4B.
+- 4D: X25519MLKEM768 with ML-DSA-44 CA, server, and client certificates.
+
+The hybrid ServerHello key-share group was captured as wire value 4588
+(0x11ec) with 1120 bytes of key-exchange data. NGINX 1.26 logs this new group
+by wire ID; the scenario configuration and OpenSSL 3.5.7 identify it as
+X25519MLKEM768.
+
+Classical 4B and ML-DSA 4D negative suites rejected missing client
+certificates, untrusted client CAs, wrong server SANs, and invalid TLS groups.
+Each successful scenario has a PCAP, public certificates, runtime/version
+manifest, protocol assertions, logs, results, cleanup checks, and SHA-256
+index under /opt/hyperledger-cacti/run-evidence/satp-case-4.

@@ -1,0 +1,77 @@
+services:
+  satp-hermes-gateway-1:
+    image: tomassilva2187/satp-gateway@sha256:d53a594c92a5cd3acffd13acc106f124d09f1ec4c4d2a3aaef27d423d77c7c7a
+    platform: linux/amd64
+    volumes:
+      - ./config/gateway-1-config.json:/opt/cacti/satp-hermes/config/config.json:ro
+      - ./satp-hermes-gateway/gateway-1/logs:/opt/cacti/satp-hermes/logs
+      - ./ontologies/:/opt/cacti/satp-hermes/ontologies/:ro
+    ports:
+      - 3010:3010/tcp
+      - 3011:3011/tcp
+      - 4010:4010/tcp
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      satp-tls-proxy-1:
+        condition: service_healthy
+
+  satp-hermes-gateway-2:
+    image: tomassilva2187/satp-gateway@sha256:d53a594c92a5cd3acffd13acc106f124d09f1ec4c4d2a3aaef27d423d77c7c7a
+    platform: linux/amd64
+    volumes:
+      - ./config/gateway-2-config.json:/opt/cacti/satp-hermes/config/config.json:ro
+      - ./satp-hermes-gateway/gateway-2/logs:/opt/cacti/satp-hermes/logs
+      - ./ontologies/:/opt/cacti/satp-hermes/ontologies/:ro
+    ports:
+      - 3110:3010/tcp
+      - 3111:3011/tcp
+      - 4110:4010/tcp
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      satp-tls-proxy-2:
+        condition: service_healthy
+
+  satp-tls-proxy-1:
+    image: cacti-satp-tls-proxy:nginx-1.26.3-openssl-3.5.7
+    platform: linux/amd64
+    build:
+      context: ./nginx
+      args:
+        DEB_REPO_URL: ${CASE4_DEB_REPO_URL:?set CASE4_DEB_REPO_URL}
+    volumes:
+      - ./nginx/proxy-1.conf:/etc/nginx/conf.d/proxy.conf:ro
+      - ./nginx/scenarios/${CASE4_SCENARIO:?set CASE4_SCENARIO}/ingress.conf:/etc/nginx/scenario/ingress.conf:ro
+      - ./nginx/scenarios/${CASE4_SCENARIO:?set CASE4_SCENARIO}/egress.conf:/etc/nginx/scenario/egress.conf:ro
+      - ${CASE4_PKI_ROOT:?set CASE4_PKI_ROOT}/proxy-1:/run/case4/tls:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+      - /var/run
+
+  satp-tls-proxy-2:
+    image: cacti-satp-tls-proxy:nginx-1.26.3-openssl-3.5.7
+    platform: linux/amd64
+    build:
+      context: ./nginx
+      args:
+        DEB_REPO_URL: ${CASE4_DEB_REPO_URL:?set CASE4_DEB_REPO_URL}
+    volumes:
+      - ./nginx/proxy-2.conf:/etc/nginx/conf.d/proxy.conf:ro
+      - ./nginx/scenarios/${CASE4_SCENARIO:?set CASE4_SCENARIO}/ingress.conf:/etc/nginx/scenario/ingress.conf:ro
+      - ./nginx/scenarios/${CASE4_SCENARIO:?set CASE4_SCENARIO}/egress.conf:/etc/nginx/scenario/egress.conf:ro
+      - ${CASE4_PKI_ROOT:?set CASE4_PKI_ROOT}/proxy-2:/run/case4/tls:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/cache/nginx
+      - /var/run
+
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+          gateway: 172.18.0.1

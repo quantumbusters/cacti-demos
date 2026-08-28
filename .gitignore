@@ -9,3 +9,8 @@ node_modules/
 .build-cache/
 .tsbuildinfo
 dist/
+
+# SATP experiment runtime and packet captures
+**/*.pcap
+**/*.pcapng
+**/runtime/
