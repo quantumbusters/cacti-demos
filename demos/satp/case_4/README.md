@@ -99,6 +99,44 @@ contained no decoded HTTP frames or readable SATP stage markers. Evidence is at:
 
     /opt/hyperledger-cacti/run-evidence/satp-case-4/4c-s/20260828_110840
 
+## Controlled comparison
+
+Run the three-repetition, five-scenario comparison as ots:
+
+    make measure-satp-case-4
+
+The comparison uses three deterministic rotating scenario orders. Each run
+captures port 3443 once on the experiment Docker bridge, records the wall-clock
+duration of satp-transact.py, and writes measurements.json plus measurements.csv
+inside the run evidence directory. The comparison directory contains
+run-index.tsv, runs.csv, summary.csv, summary.json, logs, and SHA256SUMS.
+
+The verified 2026-08-28 comparison completed 15 of 15 runs:
+
+    /opt/hyperledger-cacti/run-evidence/satp-case-4/comparisons/comparison-20260828-3x5
+
+| Scenario | SATP ms, mean | ServerHello response ms, mean | Observable hello bytes | Wire bytes per TCP stream | Public CA/server/client DER bytes |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 4A | 1690.9 | 0.683 | 375 | 6660.8 | 441 / 498.5 / 455.5 |
+| 4B | 1680.3 | 0.701 | 375 | 7255.3 | 441 / 498.5 / 455.5 |
+| 4C | 1721.4 | 0.854 | 2639 | 9497.1 | 441 / 498.5 / 455.5 |
+| 4C-S | 1623.7 | 0.731 | 2575 | 9306.4 | 441 / 498.5 / 455.5 |
+| 4D | 1614.7 | 0.779 | 2639 | 21718.7 | 4033 / 4093 / 4049 |
+
+All runs completed the SATP transfer with the expected group and balances.
+There were no interoperability failures, TCP retransmissions, or Hello Retry
+Requests. Three repetitions are useful for this controlled demonstration but
+are not a production benchmark. The SATP-duration distributions overlap, so
+the observed means do not establish a meaningful latency improvement or
+penalty.
+
+TLS 1.3 encrypts Certificate and CertificateVerify. Without a TLS session-key
+log, their on-wire sizes cannot be separated from other encrypted handshake
+records. The results report this as unavailable rather than estimating it and
+include DER sizes of the public certificate artifacts as a reproducible
+comparison. ServerHello response time is ServerHello minus ClientHello on the
+same TCP stream; it is not full handshake-completion latency.
+
 ## Security boundaries
 
 Private demo keys stay under the external runtime root with mode 0600.

@@ -378,7 +378,7 @@ clean-port-container:
 	fi
 
 .PHONY: run-satp-case-4 run-satp-case-4a run-satp-case-4b run-satp-case-4c run-satp-case-4c-s run-satp-case-4d
-.PHONY: verify-satp-case-4b-negative verify-satp-case-4d-negative
+.PHONY: verify-satp-case-4b-negative verify-satp-case-4d-negative measure-satp-case-4
 
 CASE4_SCENARIO ?= 4a
 
@@ -405,3 +405,6 @@ verify-satp-case-4b-negative:
 
 verify-satp-case-4d-negative:
 	./demos/satp/case_4/scripts/verify-negative-tests.sh 4d
+
+measure-satp-case-4:
+	./demos/satp/case_4/scripts/run-comparison.sh

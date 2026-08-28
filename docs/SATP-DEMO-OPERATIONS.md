@@ -147,3 +147,33 @@ Case 4C-S was verified on 2026-08-28 in evidence directory
 NGINX logged group 0x0201 in both directions, TShark extracted group 513 and a
 1088-byte ServerHello key share, mutual-TLS verification was SUCCESS, and no
 classical or hybrid key-establishment fallback occurred.
+
+
+## Verified Case 4 Comparison  2026-08-28
+
+The controlled measurement set ran 4A, 4B, 4C, 4C-S, and 4D three times each
+using deterministic rotating orders. All 15 transfers passed with the expected
+TLS group, authentication, SATP status, and balances. TShark observed no TCP
+retransmissions or Hello Retry Requests. The aggregate evidence is:
+
+    /opt/hyperledger-cacti/run-evidence/satp-case-4/comparisons/comparison-20260828-3x5
+
+The classical 4B mTLS baseline used 375 observable ClientHello plus ServerHello
+bytes. Hybrid 4C used 2639 bytes and standalone 4C-S used 2575 bytes. Relative
+to 4B, mean normalized wire bytes per observed TCP stream increased 30.9% for
+4C and 28.3% for 4C-S. Case 4D used the same hybrid hello sizes as 4C, but its
+ML-DSA-44 public certificate artifacts were about 4 KB each rather than about
+0.5 KB, and its normalized wire bytes were about three times the 4B baseline.
+
+Mean SATP durations ranged from 1614.7 to 1721.4 ms, with overlapping
+within-scenario variability across only three repetitions. Treat these values
+as demonstration measurements, not evidence that a PQC profile improves or
+degrades end-to-end SATP latency.
+
+TLS 1.3 encrypts Certificate and CertificateVerify, and this experiment did not
+export TLS session keys. Their individual on-wire sizes are therefore recorded
+as unavailable. The dataset supplies public-certificate DER sizes instead.
+ServerHello response time measures ServerHello minus ClientHello on the same
+stream and is not full handshake-completion latency. The source runner captures
+only the experiment Docker bridge so retransmission and segmentation counts are
+not inflated by duplicate Linux any-interface observations.

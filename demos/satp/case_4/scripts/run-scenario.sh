@@ -98,7 +98,14 @@ for port in 8545 8546; do
   test "$ready" = 1
 done
 
-tshark -i any -f 'tcp port 3443' -w "$evidence/proxy-tls.pcapng" \
+"${compose[@]}" create --no-build >"$evidence/compose-create.log" 2>&1
+network_name="$("${compose[@]}" config --format json | jq -r '.networks.default.name')"
+network_id="$(docker network inspect "$network_name" --format '{{.Id}}')"
+capture_interface="br-${network_id:0:12}"
+test -d "/sys/class/net/$capture_interface"
+printf '%s\n' "$capture_interface" >"$evidence/capture-interface.txt"
+
+tshark -i "$capture_interface" -f 'tcp port 3443' -w "$evidence/proxy-tls.pcapng" \
   >"$evidence/tshark-capture.log" 2>&1 &
 capture_pid=$!
 sleep 1
@@ -112,7 +119,25 @@ sleep 10
 sleep 6
 (cd "$repo/utils/test-ledgers"; node scripts/SATPTokenContract-CheckBalances.js) >"$evidence/balances-before.log"
 sleep 3
+satp_start_ns="$(date +%s%N)"
 (cd "$case_dir"; python3 satp-transact.py) >"$evidence/session_output.json"
+satp_end_ns="$(date +%s%N)"
+python3 - "$satp_start_ns" "$satp_end_ns" "$evidence/satp-timing.json" <<'PYTIMING'
+import json, sys
+start_ns, end_ns = int(sys.argv[1]), int(sys.argv[2])
+with open(sys.argv[3], "w", encoding="utf-8") as handle:
+    json.dump(
+        {
+            "start_epoch_ns": start_ns,
+            "end_epoch_ns": end_ns,
+            "duration_ms": (end_ns - start_ns) / 1_000_000,
+            "definition": "wall-clock duration of satp-transact.py",
+        },
+        handle,
+        indent=2,
+    )
+    handle.write("\n")
+PYTIMING
 session_id="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["sessionID"])' "$evidence/session_output.json")"
 (cd "$case_dir"; python3 satp-evm-check-status.py "$session_id") >"$evidence/status.log"
 (cd "$case_dir"; python3 satp-evm-perform-audit.py) >"$evidence/audit.log"
