@@ -20,10 +20,12 @@ outside the protected link. SATP message signing remains unchanged.
 | 4A | X25519 | Classical server authentication |
 | 4B | X25519 | Classical mutual TLS |
 | 4C | X25519MLKEM768 | Classical mutual TLS |
+| 4C-S | MLKEM768 | Classical mutual TLS |
 | 4D | X25519MLKEM768 | ML-DSA-44 mutual TLS |
 
 The proxy image is identical for all scenarios. Only the mounted scenario and
-PKI profiles change.
+PKI profiles change. Case 4C-S deliberately removes X25519 from key
+establishment so standalone MLKEM768 can be compared with hybrid Case 4C.
 
 ## Runtime
 
@@ -63,6 +65,7 @@ Run as the ots account from the repository root:
     make run-satp-case-4a
     make run-satp-case-4b
     make run-satp-case-4c
+    make run-satp-case-4c-s
     make run-satp-case-4d
 
 The first relevant run builds the proxy image and generates the required PKI
@@ -85,6 +88,16 @@ Run the fail-closed tests after their corresponding positive scenario:
 
 They require rejection of a missing client certificate, untrusted client CA,
 wrong server SAN, and invalid TLS group.
+
+## Verified standalone ML-KEM result
+
+Case 4C-S completed successfully on 2026-08-28. Both proxy directions negotiated
+standalone MLKEM768 as TLS group 0x0201 (decimal 513) with classical mutual TLS.
+The ServerHello key share was 1088 bytes. The SATP session completed with source
+balance 0, destination balance 100, and both bridge balances 0. The capture
+contained no decoded HTTP frames or readable SATP stage markers. Evidence is at:
+
+    /opt/hyperledger-cacti/run-evidence/satp-case-4/4c-s/20260828_110840
 
 ## Security boundaries
 

@@ -377,7 +377,7 @@ clean-port-container:
 		echo "No container found using port $(PORT)."; \
 	fi
 
-.PHONY: run-satp-case-4 run-satp-case-4a run-satp-case-4b run-satp-case-4c run-satp-case-4d
+.PHONY: run-satp-case-4 run-satp-case-4a run-satp-case-4b run-satp-case-4c run-satp-case-4c-s run-satp-case-4d
 .PHONY: verify-satp-case-4b-negative verify-satp-case-4d-negative
 
 CASE4_SCENARIO ?= 4a
@@ -393,6 +393,9 @@ run-satp-case-4b:
 
 run-satp-case-4c:
 	./demos/satp/case_4/scripts/run-scenario.sh 4c
+
+run-satp-case-4c-s:
+	./demos/satp/case_4/scripts/run-scenario.sh 4c-s
 
 run-satp-case-4d:
 	./demos/satp/case_4/scripts/run-scenario.sh 4d

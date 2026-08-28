@@ -6,8 +6,9 @@ case "$scenario" in
   4a) profile=classical; expected_group=X25519; expected_log_group=X25519; expected_wire_group=29; expected_client_verify=NONE ;;
   4b) profile=classical; expected_group=X25519; expected_log_group=X25519; expected_wire_group=29; expected_client_verify=SUCCESS ;;
   4c) profile=classical; expected_group=X25519MLKEM768; expected_log_group=0x11ec; expected_wire_group=4588; expected_client_verify=SUCCESS ;;
+  4c-s) profile=classical; expected_group=MLKEM768; expected_log_group=0x0201; expected_wire_group=513; expected_client_verify=SUCCESS ;;
   4d) profile=mldsa44; expected_group=X25519MLKEM768; expected_log_group=0x11ec; expected_wire_group=4588; expected_client_verify=SUCCESS ;;
-  *) echo "usage: $0 4a|4b|4c|4d" >&2; exit 2 ;;
+  *) echo "usage: $0 4a|4b|4c|4c-s|4d" >&2; exit 2 ;;
 esac
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

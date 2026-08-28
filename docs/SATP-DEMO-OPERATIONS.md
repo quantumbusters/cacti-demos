@@ -128,6 +128,7 @@ balance 0, destination balance 100, and both bridge balances 0:
 - 4A: X25519 with classical server authentication.
 - 4B: X25519 with classical mutual TLS.
 - 4C: X25519MLKEM768 with the same classical mutual-TLS identities as 4B.
+- 4C-S: standalone MLKEM768 with the same classical mutual-TLS identities.
 - 4D: X25519MLKEM768 with ML-DSA-44 CA, server, and client certificates.
 
 The hybrid ServerHello key-share group was captured as wire value 4588
@@ -140,3 +141,9 @@ certificates, untrusted client CAs, wrong server SANs, and invalid TLS groups.
 Each successful scenario has a PCAP, public certificates, runtime/version
 manifest, protocol assertions, logs, results, cleanup checks, and SHA-256
 index under /opt/hyperledger-cacti/run-evidence/satp-case-4.
+
+Case 4C-S was verified on 2026-08-28 in evidence directory
+/opt/hyperledger-cacti/run-evidence/satp-case-4/4c-s/20260828_110840.
+NGINX logged group 0x0201 in both directions, TShark extracted group 513 and a
+1088-byte ServerHello key share, mutual-TLS verification was SUCCESS, and no
+classical or hybrid key-establishment fallback occurred.
