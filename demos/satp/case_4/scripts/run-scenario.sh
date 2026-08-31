@@ -20,6 +20,8 @@ proxy_image="${CASE4_PROXY_IMAGE:-cacti-satp-tls-proxy:nginx-1.26.3-openssl-3.5.
 expected_proxy_digest="${CASE4_EXPECTED_PROXY_DIGEST:-sha256:47991a74bf4dfc31f38c226a4f523aaf95524eb719e051582aca6b098c5d3a5c}"
 deb_repo_url="${CASE4_DEB_REPO_URL:-http://10.10.20.155/nginx/linux/debian/trixie/amd64/nginx-debs}"
 compose_override="${CASE4_COMPOSE_OVERRIDE:-/opt/hyperledger-cacti/config/satp-case-1-privileged.compose.yaml}"
+keylog_override="${CASE4_KEYLOG_COMPOSE_OVERRIDE:-$case_dir/keylog.compose.yaml}"
+keylog_root="${CASE4_KEYLOG_ROOT:-}"
 pki_root="$runtime_root/pki/$profile"
 stamp="$(date +%Y%m%d_%H%M%S)"
 evidence="$evidence_root/$scenario/$stamp"
@@ -32,7 +34,23 @@ export PATH=/opt/hyperledger-cacti/bin:$PATH
 export CASE4_DEB_REPO_URL="$deb_repo_url"
 export CASE4_SCENARIO="$scenario"
 export CASE4_PKI_ROOT="$pki_root"
+export CASE4_PROXY_IMAGE="$proxy_image"
 compose=(docker compose -f "$case_dir/docker-compose.yaml" -f "$compose_override")
+keylog_enabled=0
+if [ -n "$keylog_root" ]; then
+  case "$keylog_root" in
+    /opt/hyperledger-cacti/runtime/satp-case-4/keylogs/*) ;;
+    *) echo "unexpected key-log path: $keylog_root" >&2; exit 3 ;;
+  esac
+  test -f "$keylog_override"
+  install -d -m 0700 "$keylog_root"
+  for proxy in 1 2; do
+    sudo -n install -o 33 -g 33 -m 0600 /dev/null "$keylog_root/proxy-$proxy.keys"
+  done
+  export CASE4_KEYLOG_ROOT="$keylog_root"
+  compose+=(-f "$keylog_override")
+  keylog_enabled=1
+fi
 capture_pid=
 
 stop_port_processes() {
@@ -53,6 +71,9 @@ cleanup() {
   for generated in "$case_dir/satp-hermes-gateway" "$case_dir/audits" "$case_dir/outputs"; do
     if [ -e "$generated" ]; then sudo -n chown -R ots:ots "$generated"; fi
   done
+  if [ "$keylog_enabled" = 1 ] && [ -d "$keylog_root" ]; then
+    sudo -n chown -R ots:ots "$keylog_root"
+  fi
   sleep 2
 }
 trap cleanup EXIT
@@ -214,6 +235,38 @@ find "$case_dir/audits" -maxdepth 1 -type f -mmin -5 -exec cp {} "$evidence/" \;
 
 cleanup
 trap - EXIT
+
+if [ "$keylog_enabled" = 1 ]; then
+  test -s "$keylog_root/proxy-1.keys"
+  test -s "$keylog_root/proxy-2.keys"
+  install -m 0600 "$keylog_root/proxy-1.keys" "$evidence/proxy-1.keys"
+  install -m 0600 "$keylog_root/proxy-2.keys" "$evidence/proxy-2.keys"
+  cat "$keylog_root/proxy-1.keys" "$keylog_root/proxy-2.keys" \
+    | sort -u >"$evidence/wireshark.keys"
+  chmod 0600 "$evidence/wireshark.keys"
+  test -s "$evidence/wireshark.keys"
+  if grep -qvE '^[A-Z0-9_]+ [0-9a-f]{64} [0-9a-f]+$' "$evidence/wireshark.keys"; then
+    echo "invalid TLS key-log format" >&2
+    exit 1
+  fi
+  tshark -o "tls.keylog_file:$evidence/wireshark.keys" \
+    -r "$evidence/proxy-tls.pcapng" -Y 'http.request' \
+    -T fields -E header=y -E separator=, \
+    -e frame.number -e tcp.stream -e http.request.method -e http.request.uri \
+    >"$evidence/decrypted-http-requests.csv" 2>"$evidence/tshark-decryption.log"
+  test "$(tail -n +2 "$evidence/decrypted-http-requests.csv" | sed '/^$/d' | wc -l)" -ge 9
+  grep -q '/stage-0/' "$evidence/decrypted-http-requests.csv"
+  grep -q '/stage-3/' "$evidence/decrypted-http-requests.csv"
+  cat >"$evidence/KEYLOG-SECURITY.txt" <<'EOF'
+The *.keys files contain TLS session secrets for the paired proxy-tls.pcapng.
+Anyone with both files can decrypt the captured SATP traffic. Store and transfer
+these files as sensitive data. They are for controlled analysis only.
+EOF
+  chmod 0600 "$evidence/KEYLOG-SECURITY.txt"
+  rm -f "$keylog_root/proxy-1.keys" "$keylog_root/proxy-2.keys"
+  rmdir "$keylog_root"
+fi
+
 printf '%s\n' '---PORTS---' >"$evidence/post-cleanup.txt"
 ss -ltn | grep -E ':(3010|3011|3110|3111|4010|4110|8545|8546)[[:space:]]' >>"$evidence/post-cleanup.txt" || true
 test "$(wc -l <"$evidence/post-cleanup.txt")" = 1

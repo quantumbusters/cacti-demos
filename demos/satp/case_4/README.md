@@ -137,6 +137,45 @@ include DER sizes of the public certificate artifacts as a reproducible
 comparison. ServerHello response time is ServerHello minus ClientHello on the
 same TCP stream; it is not full handshake-completion latency.
 
+## Decryptable Wireshark captures
+
+The normal evidence captures intentionally have no session-key log. Existing
+captures cannot be made decryptable after the TLS sessions have ended. To
+produce fresh analysis-only captures and NSS-format key logs:
+
+    make build-satp-case-4-keylog-image
+    make run-satp-case-4-decryptable
+
+The separate key-log proxy image is layered on the verified proxy image and is
+pinned to:
+
+    sha256:d7c5e34a5690225cd23c30e712bcfac57cebc0272bc5a4c4d81f6a6a74522b38
+
+Its verified archive is cached on infra-repo at:
+
+    /srv/repo/docker/images/hcdc/cacti-satp-tls-proxy-keylog/nginx-1.26.3-openssl-3.5.7/amd64/cacti-satp-tls-proxy-keylog-nginx-1.26.3-openssl-3.5.7-amd64.docker.tar.gz
+
+The archive SHA-256 is
+bc0f4a38c5c6e2c425a9ff06a299f8ed60b7d1ae3c5d6a13401c5924a84440ca.
+This image is for analysis only. It uses an audited LD_PRELOAD shim to register
+OpenSSL's standard key-log callback and preserves SSLKEYLOGFILE in NGINX
+workers. The normal proxy image and digest are unchanged.
+
+The verified five-case Wireshark bundle is:
+
+    /opt/hyperledger-cacti/run-evidence/satp-case-4/decryptable/wireshark-20260831
+
+Each scenario directory contains proxy-tls.pcapng, its paired wireshark.keys,
+and decrypted-http-requests.csv. In Wireshark, open the capture, navigate to
+Edit > Preferences > Protocols > TLS, and set "(Pre)-Master-Secret log
+filename" to that scenario's wireshark.keys. The display filter http.request
+then exposes the eight SATP stage requests plus the reverse-path probe.
+
+The key files are mode 0600 inside a mode-0700 bundle. They make the paired
+captures decryptable and must be treated as sensitive data. Transfer the bundle
+only through an approved protected channel. Never use the analysis image or
+session-secret export for production traffic.
+
 ## Security boundaries
 
 Private demo keys stay under the external runtime root with mode 0600.

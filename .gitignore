@@ -14,3 +14,7 @@ dist/
 **/*.pcap
 **/*.pcapng
 **/runtime/
+
+# Analysis-only TLS key-log build/runtime artifacts
+demos/satp/case_4/**/libsslkeylog.so
+demos/satp/case_4/**/*.keys

@@ -1,0 +1,8 @@
+OPENSSL_3.0.0 {
+    global:
+        SSL_CTX_new;
+        SSL_CTX_new_ex;
+        SSL_CTX_set_keylog_callback;
+    local:
+        *;
+};

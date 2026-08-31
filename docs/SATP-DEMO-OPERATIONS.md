@@ -177,3 +177,32 @@ ServerHello response time measures ServerHello minus ClientHello on the same
 stream and is not full handshake-completion latency. The source runner captures
 only the experiment Docker bridge so retransmission and segmentation counts are
 not inflated by duplicate Linux any-interface observations.
+
+
+## Analysis-Only Wireshark Decryption Bundle  2026-08-31
+
+NGINX 1.26.3 does not implement the ssl_key_log directive, and OpenSSL does not
+honor SSLKEYLOGFILE unless its embedding application registers a callback. A
+separate analysis-only image therefore layers a small versioned callback shim
+on the unchanged verified proxy image. It preserves SSLKEYLOGFILE in NGINX
+workers and writes NSS-format secrets only when the key-log Compose override is
+explicitly enabled.
+
+Fresh 4A, 4B, 4C, 4C-S, and 4D runs each completed successfully and produced a
+paired proxy-tls.pcapng plus wireshark.keys. TShark reopened every copied pair
+and decrypted nine HTTP requests: eight SATP stage calls and the reverse-path
+probe. The bundle, index, instructions, and SHA-256 manifest are under:
+
+    /opt/hyperledger-cacti/run-evidence/satp-case-4/decryptable/wireshark-20260831
+
+The key-log image digest is
+sha256:d7c5e34a5690225cd23c30e712bcfac57cebc0272bc5a4c4d81f6a6a74522b38.
+Its infra-repo archive SHA-256 is
+bc0f4a38c5c6e2c425a9ff06a299f8ed60b7d1ae3c5d6a13401c5924a84440ca.
+
+The bundle root and scenario directories are mode 0700; key logs, indexes, and
+instructions are mode 0600. Anyone with a key file and its paired capture can
+read the protected SATP payload. Treat the entire bundle as sensitive, transfer
+it only through an approved protected channel, and never enable this
+instrumentation for production traffic. Existing captures without key logs
+cannot be decrypted retroactively.

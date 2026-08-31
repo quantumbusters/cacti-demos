@@ -1,0 +1,14 @@
+services:
+  satp-tls-proxy-1:
+    environment:
+      LD_PRELOAD: /opt/case4-keylog/libsslkeylog.so
+      SSLKEYLOGFILE: /run/case4/keylog/sslkeys.log
+    volumes:
+      - ${CASE4_KEYLOG_ROOT:?set CASE4_KEYLOG_ROOT}/proxy-1.keys:/run/case4/keylog/sslkeys.log
+
+  satp-tls-proxy-2:
+    environment:
+      LD_PRELOAD: /opt/case4-keylog/libsslkeylog.so
+      SSLKEYLOGFILE: /run/case4/keylog/sslkeys.log
+    volumes:
+      - ${CASE4_KEYLOG_ROOT:?set CASE4_KEYLOG_ROOT}/proxy-2.keys:/run/case4/keylog/sslkeys.log

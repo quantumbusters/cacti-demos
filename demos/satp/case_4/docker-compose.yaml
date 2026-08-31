@@ -34,7 +34,7 @@ services:
         condition: service_healthy
 
   satp-tls-proxy-1:
-    image: cacti-satp-tls-proxy:nginx-1.26.3-openssl-3.5.7
+    image: ${CASE4_PROXY_IMAGE:-cacti-satp-tls-proxy:nginx-1.26.3-openssl-3.5.7}
     platform: linux/amd64
     build:
       context: ./nginx
@@ -52,7 +52,7 @@ services:
       - /var/run
 
   satp-tls-proxy-2:
-    image: cacti-satp-tls-proxy:nginx-1.26.3-openssl-3.5.7
+    image: ${CASE4_PROXY_IMAGE:-cacti-satp-tls-proxy:nginx-1.26.3-openssl-3.5.7}
     platform: linux/amd64
     build:
       context: ./nginx

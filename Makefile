@@ -379,6 +379,7 @@ clean-port-container:
 
 .PHONY: run-satp-case-4 run-satp-case-4a run-satp-case-4b run-satp-case-4c run-satp-case-4c-s run-satp-case-4d
 .PHONY: verify-satp-case-4b-negative verify-satp-case-4d-negative measure-satp-case-4
+.PHONY: build-satp-case-4-keylog-image run-satp-case-4-decryptable
 
 CASE4_SCENARIO ?= 4a
 
@@ -408,3 +409,9 @@ verify-satp-case-4d-negative:
 
 measure-satp-case-4:
 	./demos/satp/case_4/scripts/run-comparison.sh
+
+build-satp-case-4-keylog-image:
+	./demos/satp/case_4/scripts/build-keylog-image.sh
+
+run-satp-case-4-decryptable:
+	./demos/satp/case_4/scripts/run-decryptable-set.sh
