@@ -200,9 +200,8 @@ sha256:d7c5e34a5690225cd23c30e712bcfac57cebc0272bc5a4c4d81f6a6a74522b38.
 Its infra-repo archive SHA-256 is
 bc0f4a38c5c6e2c425a9ff06a299f8ed60b7d1ae3c5d6a13401c5924a84440ca.
 
-The bundle root and scenario directories are mode 0700; key logs, indexes, and
-instructions are mode 0600. Anyone with a key file and its paired capture can
-read the protected SATP payload. Treat the entire bundle as sensitive, transfer
-it only through an approved protected channel, and never enable this
-instrumentation for production traffic. Existing captures without key logs
-cannot be decrypted retroactively.
+The bundle root, scenario directories, captures, and key logs are readable by
+Datsun users so project participants are not locked out of the evidence. Share
+each capture together with its matching key log; the pair is intentionally
+decryptable. Do not enable this instrumentation for production traffic.
+Existing captures without key logs cannot be decrypted retroactively.

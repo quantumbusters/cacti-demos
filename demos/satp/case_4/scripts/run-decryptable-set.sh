@@ -16,8 +16,8 @@ keylog_digest="${CASE4_KEYLOG_IMAGE_DIGEST:-sha256:d7c5e34a5690225cd23c30e712bcf
 
 test "$(id -un)" = ots
 test "$(docker image inspect "$keylog_image" --format '{{.Id}}')" = "$keylog_digest"
-install -d -m 0700 "$bundle"
-install -d -m 0700 "$bundle/logs"
+install -d -m 0755 "$bundle"
+install -d -m 0755 "$bundle/logs"
 printf 'scenario\tsession\tgroup\tevidence_directory\tcapture\tkeylog\n' >"$bundle/index.tsv"
 
 cat >"$bundle/README.txt" <<'EOF'
@@ -35,15 +35,15 @@ In Wireshark:
 4. Apply the display filter: http.request
 5. The SATP /stage-0 through /stage-3 requests should be visible.
 
-SECURITY: wireshark.keys makes the paired capture decryptable. Treat the
-bundle as sensitive data, restrict access, and transfer it only through an
-approved protected channel. These secrets apply only to disposable demo runs.
+The capture and matching key log are a pair. Keep them together when sharing
+this disposable demo evidence with project participants. Do not use the
+analysis image or key logging on production traffic.
 EOF
-chmod 0600 "$bundle/README.txt"
+chmod 0644 "$bundle/README.txt"
 
 for scenario in 4a 4b 4c 4c-s 4d; do
   scenario_bundle="$bundle/$scenario"
-  install -d -m 0700 "$scenario_bundle"
+  install -d -m 0755 "$scenario_bundle"
   log="$bundle/logs/$scenario.log"
   keylog_root="$runtime_root/keylogs/$set_id-$scenario"
   echo "decryptable_set=$set_id scenario=$scenario start"
@@ -56,15 +56,15 @@ for scenario in 4a 4b 4c 4c-s 4d; do
   test -s "$evidence/wireshark.keys"
   test -s "$evidence/decrypted-http-requests.csv"
   install -m 0644 "$evidence/proxy-tls.pcapng" "$scenario_bundle/proxy-tls.pcapng"
-  install -m 0600 "$evidence/wireshark.keys" "$scenario_bundle/wireshark.keys"
-  install -m 0600 "$evidence/decrypted-http-requests.csv" "$scenario_bundle/decrypted-http-requests.csv"
-  install -m 0600 "$evidence/KEYLOG-SECURITY.txt" "$scenario_bundle/KEYLOG-SECURITY.txt"
+  install -m 0644 "$evidence/wireshark.keys" "$scenario_bundle/wireshark.keys"
+  install -m 0644 "$evidence/decrypted-http-requests.csv" "$scenario_bundle/decrypted-http-requests.csv"
+  install -m 0644 "$evidence/DECRYPTION-NOTE.txt" "$scenario_bundle/DECRYPTION-NOTE.txt"
   printf '%s\t%s\t%s\t%s\t%s\t%s\n'     "$scenario" "$session" "$group" "$evidence"     "$scenario_bundle/proxy-tls.pcapng" "$scenario_bundle/wireshark.keys"     >>"$bundle/index.tsv"
   tshark -o "tls.keylog_file:$scenario_bundle/wireshark.keys"     -r "$scenario_bundle/proxy-tls.pcapng" -Y 'http.request'     -T fields -e http.request.uri 2>/dev/null     | grep -q '/stage-3/'
   echo "decryptable_set=$set_id scenario=$scenario PASS"
 done
 
-chmod 0600 "$bundle/index.tsv" "$bundle/logs"/*.log
+chmod 0644 "$bundle/index.tsv" "$bundle/logs"/*.log
 find "$bundle" -type f ! -name SHA256SUMS -printf '%P\0'   | sort -z | xargs -0 -r -I{} sha256sum "$bundle/{}" >"$bundle/SHA256SUMS"
-chmod 0600 "$bundle/SHA256SUMS"
+chmod 0644 "$bundle/SHA256SUMS"
 echo "decryptable_bundle=$bundle"

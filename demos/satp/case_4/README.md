@@ -171,10 +171,11 @@ Edit > Preferences > Protocols > TLS, and set "(Pre)-Master-Secret log
 filename" to that scenario's wireshark.keys. The display filter http.request
 then exposes the eight SATP stage requests plus the reverse-path probe.
 
-The key files are mode 0600 inside a mode-0700 bundle. They make the paired
-captures decryptable and must be treated as sensitive data. Transfer the bundle
-only through an approved protected channel. Never use the analysis image or
-session-secret export for production traffic.
+The bundle is readable by Datsun users so project participants are not locked
+out of the evidence. Share each capture together with its matching key log;
+the pair is intentionally decryptable. Do not publish the demo evidence
+accidentally, and never use the analysis image or key logging on production
+traffic.
 
 ## Security boundaries
 

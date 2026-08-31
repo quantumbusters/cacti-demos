@@ -239,11 +239,11 @@ trap - EXIT
 if [ "$keylog_enabled" = 1 ]; then
   test -s "$keylog_root/proxy-1.keys"
   test -s "$keylog_root/proxy-2.keys"
-  install -m 0600 "$keylog_root/proxy-1.keys" "$evidence/proxy-1.keys"
-  install -m 0600 "$keylog_root/proxy-2.keys" "$evidence/proxy-2.keys"
+  install -m 0644 "$keylog_root/proxy-1.keys" "$evidence/proxy-1.keys"
+  install -m 0644 "$keylog_root/proxy-2.keys" "$evidence/proxy-2.keys"
   cat "$keylog_root/proxy-1.keys" "$keylog_root/proxy-2.keys" \
     | sort -u >"$evidence/wireshark.keys"
-  chmod 0600 "$evidence/wireshark.keys"
+  chmod 0644 "$evidence/wireshark.keys"
   test -s "$evidence/wireshark.keys"
   if grep -qvE '^[A-Z0-9_]+ [0-9a-f]{64} [0-9a-f]+$' "$evidence/wireshark.keys"; then
     echo "invalid TLS key-log format" >&2
@@ -257,12 +257,12 @@ if [ "$keylog_enabled" = 1 ]; then
   test "$(tail -n +2 "$evidence/decrypted-http-requests.csv" | sed '/^$/d' | wc -l)" -ge 9
   grep -q '/stage-0/' "$evidence/decrypted-http-requests.csv"
   grep -q '/stage-3/' "$evidence/decrypted-http-requests.csv"
-  cat >"$evidence/KEYLOG-SECURITY.txt" <<'EOF'
-The *.keys files contain TLS session secrets for the paired proxy-tls.pcapng.
-Anyone with both files can decrypt the captured SATP traffic. Store and transfer
-these files as sensitive data. They are for controlled analysis only.
+  cat >"$evidence/DECRYPTION-NOTE.txt" <<'EOF'
+The *.keys files contain the TLS session secrets needed to decrypt the paired
+proxy-tls.pcapng. Keep each pair together when sharing the disposable demo
+evidence with project participants. Do not use key logging on production traffic.
 EOF
-  chmod 0600 "$evidence/KEYLOG-SECURITY.txt"
+  chmod 0644 "$evidence/DECRYPTION-NOTE.txt"
   rm -f "$keylog_root/proxy-1.keys" "$keylog_root/proxy-2.keys"
   rmdir "$keylog_root"
 fi
